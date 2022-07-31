@@ -1,0 +1,33 @@
+<%- include("header") -%>
+
+  <div class="headerBar">
+    <form class="item" action="/" method="get">
+      <button type="submit" class="home-button" name="homeButton" >go back to home</button>
+    </form>
+    <div class="box" id="heading">
+      <h1> <%= listId.replace("-"," ") %> </h1>
+    </div>  
+    <form class="deletelist" action="/deletelist" method="post">
+      <button type="submit" class="delete-button" name="delListBtn" value=<%= listId %>>delete</button>
+    </form>
+  </div>
+
+  <div class="box">
+    <% for (let i=0; i<listItems.length; i++) { %>
+      <div class="item">
+        <form action="/deleteItem" method="post">
+          <input type="hidden" name="delItemBtn" value=<%= listId %>>
+          <input name="checkMark" onchange="this.form.submit()" value=<%= i %> type="checkbox">
+        </form>
+        <p><%=  listItems[i] %></p>
+      </div>
+    <% } %>
+
+    <form class="item" action="/" method="post">
+      <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+      <button type="submit" name="itemSubBtn" value=<%= listId %>>+</button>
+    </form>
+  </div>
+  
+
+<%- include("footer") -%>

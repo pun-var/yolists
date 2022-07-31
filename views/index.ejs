@@ -1,0 +1,27 @@
+<%- include("header") -%>
+
+
+  <div class="box">
+      <form class="item" action="/createlist" method="post">
+        <input type="text" onblur="textReformat()" name="newListTitle" placeholder="New List" autocomplete="off">
+        <button type="submit" name="listSubBtn" value=<%= listTitle %>>+</button>
+      </form>
+
+    <% for (let i=1; i<listIds.length; i++) { %>
+      <form class="item" action="/createlist" method="post">
+        <button type="submit" name="newListTitle" value=<%= listIds[i] %>><%=  listIds[i].replace("-"," ") %></button>
+      </form>
+      <% } %>
+
+  </div>
+
+  <script>
+    function textReformat() {
+      var listName = document.getElementsByName("newListTitle");
+
+      listName.value = listName.value.replace(/[^\w\s]/gi, '');
+    }
+  </script>
+
+
+<%- include("footer") -%>
